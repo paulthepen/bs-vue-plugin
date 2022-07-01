@@ -1,4 +1,6 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { defineCustomElement } from 'vue';
+import App from './App.ce.vue';
+const BrightsidePlugin = defineCustomElement(App);
 
-createApp(App).mount('#app')
+customElements.define('brightside-plugin', BrightsidePlugin);
+

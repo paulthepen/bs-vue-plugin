@@ -1,15 +1,21 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <img alt="Brightside Logo" src="./assets/logo.png">
+  <unitSearch v-if="page=='Unit Search'" />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import unitSearch from './components/UnitSearch.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    unitSearch,
+  },
+  props: {
+    page: {
+      default: 'Unit Search',
+      type: String
+    }
   }
 }
 </script>
