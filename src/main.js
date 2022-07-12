@@ -1,6 +1,6 @@
 import { defineCustomElement } from 'vue';
-import App from './App.ce.vue';
-const BrightsidePlugin = defineCustomElement(App);
+import unitSearch from './customElements/UnitSearch.ce.vue';
 
-customElements.define('brightside-plugin', BrightsidePlugin);
+const unitSearchComponent = defineCustomElement(unitSearch);
 
+customElements.define('brightside-unit-search', unitSearchComponent);
