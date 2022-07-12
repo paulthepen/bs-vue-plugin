@@ -10,6 +10,12 @@ module.exports = defineConfig({
         config.output.chunkFilename = 'js/[name].chunk.js';
       }
     },
+    css: {
+      extract: {
+        filename: 'css/[name].css',
+        chunkFilename: 'css/[name].css',
+      },
+    },
     chainWebpack: config => {
       config.module
         .rule('vue')
@@ -20,5 +26,5 @@ module.exports = defineConfig({
             isCustomElement: tag => tag.startsWith('brightside-')
           }
         }))
-    }
+    },
 })

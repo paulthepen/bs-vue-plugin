@@ -3,7 +3,9 @@
     This page creates an axios call with given properties and returns the search results all prettified. <br />
     Here is the requested minimum bedrooms parameter for the search: {{criteria.minbedrooms}}
   </div>
-  <button @click="changeCriteria">This button will change it to 4 bedrooms</button>
+  <button @click="goToDetails">This goes to Unit Search</button><br />
+  <button @click="changeCriteria">This button will change it to 4 bedrooms</button><br />
+  <router-link to="/unit-details/4">this is using router-link to unit 4</router-link>
 </template>
 
 <script>
@@ -17,12 +19,15 @@ export default {
   data() {
     return {
       criteria: getElementData('criteria'),
-      units: apiCall('demo.bookonthebrightside.com/rm4/json/unitsearch.php?minbedrooms=' + this.criteria.minbedrooms)
+      // units: unitSearchApi(criteria);
       }
   },
   methods: {
     changeCriteria() {
       this.criteria.minbedrooms = 4;
+    },
+    goToDetails() {
+      this.$router.push('/unit-details');
     }
   }
 }
