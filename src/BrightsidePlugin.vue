@@ -4,28 +4,12 @@
 
 <script>
 export default {
-  props: {
-    path: {
-      type: String,
-      required: false,
-      default: "unit-search",
-      validator(value) {
-        const paths = ["unit-search", "unit-details"];
-        return paths.includes(value);
-      },
-    },
-    root: {
-      type: String,
-      required: false,
-      default: ""
-    },
-  },
+  props: ['path', 'base'],
   beforeMount() {
-    console.log(this.root);
     if (this.path == 'unit-details') {
-        this.$router.push(this.root + '/unit-details');
+        this.$router.push(this.base + '/unit-details');
     } else if (this.path == 'unit-search') {
-        this.$router.push(this.root + '/unit-search');
+        this.$router.push(this.base + '/unit-search');
     }
   }
 };
