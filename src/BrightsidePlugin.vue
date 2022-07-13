@@ -4,13 +4,9 @@
 
 <script>
 export default {
-  props: ['path', 'base'],
+  props: ['path'],
   beforeMount() {
-    if (this.path == 'unit-details') {
-        this.$router.push(this.base + '/unit-details');
-    } else if (this.path == 'unit-search') {
-        this.$router.push(this.base + '/unit-search');
-    }
+    this.$router.push(this.path);
   }
 };
 </script>

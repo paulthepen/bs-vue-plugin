@@ -1,17 +1,30 @@
-import { createApp } from 'vue';
-import {initializeRouter} from './router.js';
-import BrightsidePlugin from './BrightsidePlugin.vue';
+import { createApp } from "vue";
+import { initializeRouter, setMetaData } from "./router.js";
+import BrightsidePlugin from "./BrightsidePlugin.vue";
 
-const pathArray = document.querySelector("#brightside-plugin").dataset.path.split('/');
-const pathBase = pathArray[pathArray.length - 1];
-const pathRoot = pathArray.length > 1? "/" + pathArray[0]: "";
-const router = initializeRouter(pathRoot);
+const element = document.querySelector("#brightside-plugin");
+if (element != undefined) {
+  let defaultPage = "unit-search";
+  let defaultRoot = "rentals";
+  const page = document.querySelector("#brightside-plugin").dataset?.page;
+  const root = document.querySelector("#brightside-plugin").dataset?.root;
+  const selectedRoot = root != undefined ? root : defaultRoot;
+  const selectedPage = page != undefined ? page : defaultPage;
+  let fullPath = "/" + selectedRoot + "/" + selectedPage;
 
-const url = window.location.path.split("/");
-if (url.length > 1 && url[0] == "/" + pathRoot) {
-    
+  const url = window.location.pathname;
+  const urlParts = url.split("/");
+
+  if (urlParts.length > 1 && urlParts[1] == selectedRoot && urlParts[2] != "") {
+    fullPath = url;
+  }
+
+  const router = initializeRouter(selectedRoot);
+  router.beforeEach((to, from, next) => {
+    setMetaData(to, from, next);
+  });
+
+  const app = createApp(BrightsidePlugin, { path: fullPath });
+  app.use(router);
+  app.mount("#brightside-plugin");
 }
-
-const app = createApp(BrightsidePlugin, {path: pathBase, base: pathRoot});
-app.use(router);
-app.mount("#brightside-plugin");

@@ -1,5 +1,5 @@
 <template>
-    Unit Details for unit #{{unitId}}!
+    Unit Details for unit #{{unitId}}: {{unitName}}!
 </template>
 
 <script>
@@ -13,6 +13,11 @@
                         this.$route.push('/unit-search');
                     }
                 }
+            },
+            unitName: {
+                type: String,
+                required: false,
+                default: "default"
             }
         },
         components: {},
@@ -26,6 +31,6 @@
         }, 
         methods: {
             
-        }
+        },
     }
 </script>
