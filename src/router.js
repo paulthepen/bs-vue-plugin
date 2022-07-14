@@ -23,6 +23,8 @@ const pages = [
   { name: "unit-details/:unitName", component: unitDetails },
 ];
 //TODO: it would be nice to find a way to go to unit-details/id and end up at unit-details/unit-name
+// right now, it works if you navigate through the unit-search page, but you can't go directly to unit-details/name because it doesn't pass the id
+// need some kind of route that will take the name in the path, parse it, and get the unit id and redirect to that one
 
 export const initializeRouter = (pathRoot) => {
   const routes = [];

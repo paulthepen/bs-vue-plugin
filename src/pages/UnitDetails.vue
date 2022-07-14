@@ -1,36 +1,29 @@
 <template>
-    Unit Details for unit #{{unitId}}: {{unitName}}!
+  <div>
+    This page shows the details for unit {{ unitData?.Id }}
+    <div style="width: 100%; text-align: center">
+      {{ unitData?.Name }}
+    </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        props:{
-            unitId: {
-                type: String,
-                required: true,
-                validator (value) {
-                    if (value == null) {
-                        this.$route.push('/unit-search');
-                    }
-                }
-            },
-            unitName: {
-                type: String,
-                required: false,
-                default: "default"
-            }
-        },
-        components: {},
-        data() {
-            return {
-                
-            }
-        },
-        computed: {
-            
-        }, 
-        methods: {
-            
-        },
-    }
+import { callUnitDetails } from "../helpers/apiCalls";
+
+export default {
+  props: ["unitId", "unitName"],
+  components: {},
+  data() {
+    return {
+        unitData: {}
+    };
+  },
+  computed: {},
+  methods: {},
+  beforeMount() {
+    callUnitDetails(this.unitId).then((res) => {
+      this.unitData = res.data;
+    });
+  },
+};
 </script>

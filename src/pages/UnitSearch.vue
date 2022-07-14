@@ -1,23 +1,20 @@
 <template>
   <div class="hello">
-    This page creates an axios call with given properties and returns the search
-    results all prettified. <br />
-    Here is the requested id parameter for the search:
-    {{ criteria.id }}
-    <p>
-      {{ units }}
-    </p>
+    <ul v-for="unit in units" :key="unit.id">
+      <li>
+        <router-link :to="getUnitPage(unit)">{{ unit.Name }}</router-link>
+      </li>
+    </ul>
   </div>
-  <button @click="changeCriteria">
-    This button will change it to 4 bedrooms</button
-  ><br />
-  <router-link :to="unitDetails"
-    >this is using router-link to unit 4</router-link
-  >
+  <button @click="changeCriteria">Show 4 bedroom cabins</button><br />
 </template>
 
 <script>
-import { getElementData, setElementData } from "../helpers/DataRetriever.js";
+import {
+  getElementData,
+  setElementData,
+  unitNameToSlug,
+} from "../helpers/DataRetriever.js";
 import { callUnitSearch } from "../helpers/apiCalls";
 
 setElementData("criteria", "criteria");
@@ -30,33 +27,30 @@ export default {
     };
   },
   watch: {
-    criteria: function(val) {
-      callUnitSearch(val).then((res)=> {
+    criteria: function (val) {
+      callUnitSearch(val).then((res) => {
         this.units = res.data;
       });
-    }
+    },
   },
-  computed: {
-    // example of going to another component via route
-    unitDetails() {
+  mounted() {
+    callUnitSearch(this.criteria).then((res) => {
+      this.units = res.data;
+    });
+  },
+  methods: {
+    changeCriteria() {
+      this.criteria = { minbedrooms: true, bedrooms: 4 };
+    },
+    getUnitPage(unit) {
       return {
         name: "unit-details/:unitName",
         params: {
-          unitId: 4,
-          unitName: 'my-neck-of-the-woods'
+          unitId: unit.Id,
+          unitName: unitNameToSlug(unit.Name),
         },
       };
     },
-  },
-   mounted() {
-      callUnitSearch(this.criteria).then((res)=> {
-        this.units = res.data;
-      });
-    },
-    methods: {
-      changeCriteria() {
-        this.criteria = {minbedrooms: true, bedrooms: 4};
-      },
   },
 };
 </script>

@@ -19,3 +19,7 @@ export const getElementData = (key) => {
         return {};
     }
 }
+
+export const unitNameToSlug = (name) => {
+    return name.toLowerCase().replace(' ', '-');
+}
