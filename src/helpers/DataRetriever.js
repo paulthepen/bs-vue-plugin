@@ -1,7 +1,15 @@
 let elementData = {};
 
 export const setElementData = (key, data) => {
-    elementData[key] = data;
+    if (typeof data == 'object') {
+        elementData[key] = data;
+    } else {
+        if (typeof config !== "undefined") {
+            elementData[key] = config[data];
+        } else {
+            elementData[key] = {};
+        }
+    }
 } 
 
 export const getElementData = (key) => {

@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import { initializeRouter, setMetaData } from "./router.js";
+import {initializeApi} from './helpers/apiCalls.js';
 import BrightsidePlugin from "./BrightsidePlugin.vue";
 
 const element = document.querySelector("#brightside-plugin");
@@ -23,6 +24,8 @@ if (element != undefined) {
   router.beforeEach((to, from, next) => {
     setMetaData(to, from, next);
   });
+
+  initializeApi((apiUrl != undefined)? apiUrl: "none" )
 
   const app = createApp(BrightsidePlugin, { path: fullPath });
   app.use(router);
