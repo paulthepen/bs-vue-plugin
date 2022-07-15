@@ -8,22 +8,38 @@
 </template>
 
 <script>
-import { callUnitDetails } from "../helpers/apiCalls";
+import { callUnitDetails, callUnitSearch } from "../helpers/apiCalls";
+import { createUrlSlug } from "@/helpers/DataRetriever";
 
 export default {
-  props: ["unitId", "unitName"],
-  components: {},
-  data() {
-    return {
-        unitData: {}
-    };
+  props: {
+    unitId: String, unitName: String
   },
-  computed: {},
-  methods: {},
-  beforeMount() {
-    callUnitDetails(this.unitId).then((res) => {
-      this.unitData = res.data;
-    });
-  },
+    components: {},
+    data() {
+      return {
+        unitData: {},
+      };
+    },
+    computed: {},
+    methods: {},
+    mounted() {
+      let unitId = this.unitId;
+      if (!unitId) {
+        callUnitSearch().then((res) => {
+          const matchingUnit = res.data.find((unit) => {
+            return createUrlSlug(unit.Name) == this.unitName;
+          });
+          unitId = matchingUnit.Id;
+          callUnitDetails(unitId).then((res) => {
+            this.unitData = res.data;
+          });
+        });
+      } else {
+        callUnitDetails(this.unitId).then((res) => {
+          this.unitData = res.data;
+        });
+      }
+    },
 };
 </script>

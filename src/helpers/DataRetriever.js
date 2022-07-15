@@ -1,5 +1,6 @@
 let elementData = {};
 
+//sets the data from either a config object declared on the parent site or a provided object
 export const setElementData = (key, data) => {
     if (typeof data == 'object') {
         elementData[key] = data;
@@ -20,6 +21,7 @@ export const getElementData = (key) => {
     }
 }
 
-export const unitNameToSlug = (name) => {
+//translates a property into a hyphenated url slug
+export const createUrlSlug = (name) => {
     return name.toLowerCase().replace(' ', '-');
 }

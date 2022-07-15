@@ -13,7 +13,7 @@
 import {
   getElementData,
   setElementData,
-  unitNameToSlug,
+  createUrlSlug,
 } from "../helpers/DataRetriever.js";
 import { callUnitSearch } from "../helpers/apiCalls";
 
@@ -47,7 +47,7 @@ export default {
         name: "unit-details/:unitName",
         params: {
           unitId: unit.Id,
-          unitName: unitNameToSlug(unit.Name),
+          unitName: createUrlSlug(unit.Name),
         },
       };
     },
