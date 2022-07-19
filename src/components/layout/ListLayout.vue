@@ -15,7 +15,12 @@
         },
         computed: {
             layoutClass() {
-                return this.display?.gutters? 'container': 'container-fluid'
+                return {
+                   container: this.display?.gutters,
+                   'container-fluid': !this.display?.gutters,
+                   'flex-column': this.display?.header?.honorSidebar,
+
+                }
             }
         }, 
         methods: {

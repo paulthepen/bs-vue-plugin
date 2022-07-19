@@ -14,8 +14,14 @@ export default {
   },
   computed: {
     positionClass() {
-      return this.options?.position == "right"? 'order-3' : 'order-2';
-    }
+      if (this.options?.header?.honorSidebar) {
+        return 'align-self-stretch order-1';
+      } else if (this.options?.sidebar?.position == "right") {
+        return 'order-3';
+      } else {
+        return 'order-2';
+      }
+    },
   },
   methods: {},
 };

@@ -17,7 +17,7 @@
             positionClass() {
                 if (this.display?.sidebar?.position == 'right') {
                     return 'order-2';
-                } else if (this.display?.sidebar) {
+                } else if (this.display?.sidebar || this.display?.header?.honorSidebar) {
                     return 'order-3';
                 } else {
                     return '';

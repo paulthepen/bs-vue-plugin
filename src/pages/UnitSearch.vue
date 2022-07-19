@@ -4,7 +4,7 @@
         <unitFilter options="display?.header?.filter" v-if="display?.header?.filter" />
         <unitSort options="display?.header?.sort" v-if="display?.header?.sort" />
       </listHeader>
-      <listSidebar v-if="display?.sidebar" :options="display?.sidebar">
+      <listSidebar v-if="display?.sidebar" :options="display">
         <unitFilter options="display?.sidebar?.filter" v-if="display?.sidebar?.filter" />
         <unitSort options="display?.sidebar?.sort" v-if="display?.sidebar?.sort" />
       </listSidebar>

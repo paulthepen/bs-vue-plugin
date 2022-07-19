@@ -16,7 +16,11 @@
         },
         computed: {
             widthClass() {
-                return this.options?.honorSidebar? '': 'container-fluid';
+                if (this.options?.honorSidebar) {
+                    return 'order-2';
+                } else {
+                    return 'container-fluid';
+                }
             }
         }, 
         methods: {
