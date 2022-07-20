@@ -1,5 +1,5 @@
 <template>
-  <div :class="positionClass">
+  <div>
     Sidebar
     <slot></slot>
   </div>
@@ -12,16 +12,7 @@ export default {
   data() {
     return {};
   },
-  computed: {
-    positionClass() {
-      if (this.options?.header?.honorSidebar) {
-        return 'align-self-stretch order-1';
-      } else if (this.options?.sidebar?.position == "right") {
-        return 'order-3';
-      } else {
-        return 'order-2';
-      }
-    },
+  computed: { 
   },
   methods: {},
 };

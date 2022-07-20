@@ -1,5 +1,5 @@
 <template>
-    <div :class="widthClass">
+    <div class="flex-fluid">
         Header
         <slot></slot>
     </div>
@@ -15,13 +15,7 @@
             }
         },
         computed: {
-            widthClass() {
-                if (this.options?.honorSidebar) {
-                    return 'order-2';
-                } else {
-                    return 'container-fluid';
-                }
-            }
+            //custom height option
         }, 
         methods: {
             
