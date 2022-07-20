@@ -40,7 +40,22 @@
     },
     "rules": {
       "no-unused-vars": "off",
-      "no-undef": "off"
+      "no-undef": "off",
+      "vue/max-len": ["error", {
+        "code": 140,
+        "template": 250,
+        "tabWidth": 3,
+        "comments": 150,
+        "ignorePattern": "",
+        "ignoreComments": true,
+        "ignoreTrailingComments": false,
+        "ignoreUrls": true,
+        "ignoreStrings": false,
+        "ignoreTemplateLiterals": true,
+        "ignoreRegExpLiterals": false,
+        "ignoreHTMLAttributeValues": false,
+        "ignoreHTMLTextContents": false
+    }]
     }
   },
   "browserslist": [

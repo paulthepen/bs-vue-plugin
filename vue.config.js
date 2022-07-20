@@ -23,6 +23,7 @@ module.exports = defineConfig({
         .tap(options => ({
           ...options,
           compilerOptions: {
+            experimentalDisableTemplateSupport: true,
             isCustomElement: tag => tag.startsWith('brightside-')
           }
         }))
