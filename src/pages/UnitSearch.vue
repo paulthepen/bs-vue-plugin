@@ -12,11 +12,7 @@
         <unitSort options="display?.header?.sort" v-if="display?.header?.sort" />
       </listHeader>
     </template>
-    <ul v-for="unit in units" :key="unit.id">
-      <li>
-        <router-link :to="getUnitPage(unit)">{{ unit.Name }}</router-link>
-      </li>
-    </ul>
+    <unitList :units="units" :options="display?.list"/>
     <button @click="changeCriteria">Show 4 bedroom cabins</button><br />
   </listLayout>
 </template>
@@ -25,12 +21,12 @@
 import {
   getElementData,
   setElementData,
-  createUrlSlug,
 } from "../helpers/DataRetriever.js";
 import { callUnitSearch } from "../helpers/apiCalls";
 import listLayout from '../components/layout/ListLayout.vue';
 import listSidebar from "../components/layout/ListSidebar.vue";
 import listHeader from "../components/layout/ListHeader.vue";
+import unitList from '../components/unit/UnitList.vue'
 import unitFilter from "../components/unit/UnitFilter.vue";
 import unitSort from "../components/unit/UnitSort.vue";
 
@@ -46,7 +42,7 @@ export default {
       units: null,
     };
   },
-  components: { listLayout, listSidebar, listHeader, unitFilter, unitSort },
+  components: { listLayout, listSidebar, listHeader, unitFilter, unitSort, unitList },
   watch: {
     criteria: function (val) {
       callUnitSearch(val).then((res) => {
@@ -71,15 +67,6 @@ export default {
   methods: {
     changeCriteria() {
       this.criteria = { minbedrooms: true, bedrooms: 4 };
-    },
-    getUnitPage(unit) {
-      return {
-        name: "unit-details/:unitName",
-        params: {
-          unitId: unit.Id,
-          unitName: createUrlSlug(unit.Name),
-        },
-      };
     },
   }
 };
