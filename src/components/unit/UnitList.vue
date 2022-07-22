@@ -1,7 +1,7 @@
 <template>
-    <div v-for="unit in units" :key="unit.id">
+    <div v-for="unit in units" :key="unit.id" class="container-fluid">
         <unitCard v-if="options?.card" :unit="unit" />
-        <unitListItem v-else :unit="unit" />
+        <unitListItem v-else :unit="unit" :options="options" />
     </div>
 </template>
 

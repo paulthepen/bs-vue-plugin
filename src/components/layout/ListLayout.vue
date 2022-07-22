@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex flex-wrap" :class="layoutClass" v-if="display?.header?.honorSidebar">
+    <div class="d-flex" :class="layoutClass" v-if="display?.header?.honorSidebar">
         <slot name="sidebar"></slot>
         <div class="order-2">
             <slot name="header"></slot>
@@ -9,11 +9,15 @@
         </div>
     </div>
     <div class="d-flex flex-wrap" :class="layoutClass" v-else>
-        <slot name="header"></slot>
-        <slot name="sidebar"></slot>
-        <listContent :display="display" :class="contentClass">
-            <slot></slot>
-        </listContent>
+        <div class="d-flex flex-fluid">
+            <slot name="header"></slot>
+        </div>
+        <div class="d-flex">
+            <slot name="sidebar"></slot>
+            <listContent :display="display" :class="contentClass">
+                <slot></slot>
+            </listContent>
+        </div>
     </div>
 </template>
 
