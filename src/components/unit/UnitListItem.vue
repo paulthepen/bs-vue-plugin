@@ -1,6 +1,6 @@
 <template>
     <router-link :to="getUnitPage(unit)">
-        <div class="d-flex unit-list-item" :class="flexWrap">
+        <div class="d-flex unit-list-item" :class="flexWrap" :style="customStyles">
             <div class="unit-list-img" :class="imgOrder" v-if="options?.fullImg">
                     <img :src="unit.Thumbnail" />
             </div>
@@ -47,6 +47,15 @@ export default {
         },
         flexWrap() {
             return {'flex-wrap': !this.options?.fullImg}
+        },
+        customStyles() {
+            const styles = this.options?.styles;
+
+            if (!styles) {
+                return "";
+            } else {
+                return styles;
+            }
         }
     },
     methods: {
